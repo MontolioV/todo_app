@@ -1,6 +1,8 @@
 # todo_app
 
-> Test task, todo list.
+Test task: TODO list app. Core functionality is to add, remove and edit tasks. Also it'll be great to extend core functionality.
+
+Serverless, frontend framework - Vue, UI framework - on my taste.
 
 ## Build Setup
 
