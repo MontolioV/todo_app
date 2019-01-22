@@ -1,16 +1,17 @@
 <template>
-  <div class="card" :class="{ open: task.open }">
+  <div class="card" :class="{ openTask: task.open }">
     <div class="card-body">
-      <h5 v-if="task.open" class="card-title">
-        Open task
-      </h5>
-      <h5 v-else class="card-title">
-        Closed task
-      </h5>
-
-      <p class="card-text">
-        {{ dateTimeInterval }}
-      </p>
+      <div class="d-flex justify-content-between">
+        <h5 v-if="task.open" class="card-title">
+          {{ task.id }}. Open task
+        </h5>
+        <h5 v-else class="card-title">
+          {{ task.id }}. Closed task
+        </h5>
+        <p class="card-text">
+          {{ dateTimeInterval }}
+        </p>
+      </div>
       <p class="card-text">
         {{ task.description }}
       </p>
@@ -19,14 +20,14 @@
         class="d-flex"
       >
         <b-button
-          class="btn btn-success"
+          class="btn btn-success flex-fill"
           @click="closeTask"
         >
           Close task
         </b-button>
 
         <b-button
-          class="btn btn-danger"
+          class="btn btn-danger flex-fill"
           @click="deleteTask(task.id)"
         >
           Remove task
@@ -41,7 +42,7 @@ import moment from 'moment';
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'TodoItem',
+  name: 'Task',
   props: {
     task: {
       type: Object,
@@ -65,22 +66,20 @@ export default {
     }),
     closeTask() {
       this.task.open = false;
-      this.task.closeTimestamp = new Date();
+      this.task.closeTimestamp = new Date().getTime();
       this.editTask(this.task);
-      // Trigger recompute
-      this.task = { ...this.task };
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.card {
-  width: 300px;
-}
-.card.open {
+.card.openTask {
   .card-title {
     color: dodgerblue;
+  }
+  .btn {
+    margin: 5px;
   }
 }
 </style>
